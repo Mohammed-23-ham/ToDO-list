@@ -1,0 +1,29 @@
+.td-app {
+    width: 70%;
+    height: 75vb;
+    border: 1px solid red;
+    position: absolute;
+    left: 15%;
+    top: 15%;
+    padding: 10px;
+}
+
+.list {
+    position: relative;
+    height: 50vb;
+    max-width: 80%;
+    scrollbar-width: none;
+}
+
+.inpout {
+    position: relative;
+    max-width: 100%;
+}
+.inpout-form {
+    width: 80%;
+}
+.btns {
+position: relative;
+    margin-top: 1rem;
+    z-index: 10;
+}

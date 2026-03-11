@@ -1,0 +1,29 @@
+:root {
+    
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    position: relative;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: url("/assets/imgs/width.jpg") no-repeat center/cover;
+    background-size: cover;
+    filter: blur(2px);
+    z-index: -1;
+}
