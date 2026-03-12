@@ -17,8 +17,8 @@ useEffect(() => {
 
   return (
     <div className='inpout row gap-1'>
-        <input ref={inText} className='inpout-form col-10' type="text" />
-        <button className='input-btn col-2 d-flex justify-content-center align-items-center' onClick={handleAdd}><i className="fas fa-plus"></i></button>
+        <input ref={inText} className='inpout-form form-control col-10' type="text" />
+        <button className='input-btn btn btn-dark col-2 d-flex justify-content-center align-items-center' onClick={handleAdd}><i className="fas fa-plus"></i></button>
     </div>
   )
 }

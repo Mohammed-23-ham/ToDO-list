@@ -1,7 +1,8 @@
 .td-app {
+    border-radius: 20px;
+    box-shadow: 0 0 10px #7b7575;
     width: 70%;
     height: 75vb;
-    border: 1px solid red;
     position: absolute;
     left: 15%;
     top: 15%;
@@ -27,3 +28,37 @@ position: relative;
     margin-top: 1rem;
     z-index: 10;
 }
+#completed {
+    text-decoration: line-through;
+}
+.btn-del {
+    font-size: xx-small;
+    width: 1px;
+}
+
+/* responsive adjustments for small screens */
+@media (max-width: 600px) {
+    .btnl {}
+    .list-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .list-item p {
+        font-size: 1rem;
+        margin-bottom: 0.25rem;
+    }
+    .btn-del {
+        font-size: x-small;
+        width: auto;
+        margin:0.1px;
+        width: 1px;
+    }
+    .btns {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    .list {
+        max-width: 100%;
+    }
+}
+
