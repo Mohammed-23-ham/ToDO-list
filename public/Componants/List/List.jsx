@@ -63,7 +63,7 @@ export default function List({ todos, setTodos }) {
                   </>
                 ) : (
                   <>
-                    <p className='m-1 flex-grow-1' id={todo.completed ? 'completed' : 'text'}>{index + 1}. {todo.text}</p>
+                    <p className='m-1 flex-grow-1' id={todo.completed ? 'completed' : 'text'}>{index + 1}. {todo.tusk}</p>
                     <button onClick={() => handleDel(index)} className='btn-del btn btn-danger d-flex justify-content-center align-items-center h-100 py-1'>
                       <i className="fas fa-trash"></i>
                     </button>
