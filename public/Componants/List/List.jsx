@@ -15,6 +15,7 @@ export default function List({ todos, setTodos }) {
     const { error } = await supabase.from("todos").update({ completed: true }).neq('id', 0);
     if(error) {
       alert(error.message);
+      return;
     }
     const updated = todos.map(todo => ({ ...todo, completed: true }));
     setTodos(updated);
