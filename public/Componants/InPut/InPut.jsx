@@ -10,15 +10,13 @@ export default function InPut({todos, setTodos, inText}) {
       return
     }
 
-    // Prevent inserting duplicates if 'tusk' is unique in the DB
     if (todos.some(todo => todo.tusk === text)) {
       alert("This tusk already exists")
       return
     }
 
-    const { data, error } = await supabase.from("todos").insert({ tusk: text }).select().single();
+    const { data, error } = await supabase.from("todos").insert({ tusk: text, completed: false }).select().single();
     if (error) {
-      // Handle unique constraint violation (duplicate key)
       if (error.message?.includes("duplicate key") || error.code === "23505") {
         alert("This tusk already exists")
       } else {

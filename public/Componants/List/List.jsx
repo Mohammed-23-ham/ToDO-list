@@ -1,43 +1,78 @@
-import {useState} from 'react'
+import { useState } from 'react'
+import supabase from '../../../src/supabase'
 
 export default function List({ todos, setTodos }) {
 
-  const handleDelAll = () => {
-    setTodos([])
-  }
-  const handleChAll = () => {
-    todos.map((todo) => {
-      return todo.completed = true
-    })
-    setTodos([...todos])
+  const handleDelAll = async () => {
+    const { error } = await supabase.from("todos").delete().neq('id', 0);
+    if (error) {
+      alert(error.message);
+      return;
+    }
+    setTodos([]);
+  };
+  const handleChAll = async () => {
+    const { error } = await supabase.from("todos").update({ completed: true }).neq('id', 0);
+    if(error) {
+      alert(error.message);
+    }
+    const updated = todos.map(todo => ({ ...todo, completed: true }));
+    setTodos(updated);
   }
 
-  const handleDel = (index) => {
-    setTodos(todos.filter((_, i) => i !== index))
+  const handleDel = async (index) => {
+    const id = todos[index].id;
+    const { error } = await supabase.from("todos").delete().eq('id', id);
+    if (error) {
+      alert(error.message);
+      return;
+    }
+    const updated = [...todos];
+    updated.splice(index, 1);
+    setTodos(updated);
   }
 
-  const handleCheck = (index) => {
-    todos[index].completed = !todos[index].completed;
-    setTodos([...todos])
+  const handleCheck = async (index) => {
+    const id = todos[index].id;
+    const { error } = await supabase.from("todos").update({ completed: !todos[index].completed }).eq('id', id);
+    if (error) {
+      alert(error.message);
+      return;
+    }
+    const updated = [...todos];
+    updated[index].completed = !updated[index].completed;
+    setTodos(updated);
+
   }
 
   const [editIndex, setEditIndex] = useState(null);
   const [editText, setEditText] = useState("");
 
-  const handleEdit = (index) => {
-    // start editing the selected todo
+  const handleEdit = async (index) => {
+    if (editIndex === index) {
+      const id = todos[index].id;
+      const { error } = await supabase.from("todos").update({ tusk: editText }).eq('id', id);
+      if (error) {
+        alert(error.message)
+      }
+    }
+
     setEditIndex(index);
-    setEditText(todos[index].text);
+    setEditText(todos[index].tusk);
   };
 
-  const handleConfirmEdit = () => {
-    if (editIndex === null) return;
+  const handleConfirmEdit = async () => {
+    const id = todos[editIndex].id;
+    const { error } = await supabase.from("todos").update({ tusk: editText }).eq('id', id);
+    if (error) {
+      alert(error.message);
+      return;
+    }
     const updated = [...todos];
-    updated[editIndex].text = editText;
+    updated[editIndex].tusk = editText;
     setTodos(updated);
     setEditIndex(null);
-    setEditText("");
-  };
+  }
 
   return (
     <>
