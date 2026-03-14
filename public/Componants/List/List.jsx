@@ -52,25 +52,25 @@ export default function List({ todos, setTodos }) {
   const handleEdit = async (index) => {
     if (editIndex === index) {
       const id = todos[index].id;
-      const { error } = await supabase.from("todos").update({ tusk: editText }).eq('id', id);
+      const { error } = await supabase.from("todos").update({ task: editText }).eq('id', id);
       if (error) {
         alert(error.message)
       }
     }
 
     setEditIndex(index);
-    setEditText(todos[index].tusk);
+    setEditText(todos[index].task);
   };
 
   const handleConfirmEdit = async () => {
     const id = todos[editIndex].id;
-    const { error } = await supabase.from("todos").update({ tusk: editText }).eq('id', id);
+    const { error } = await supabase.from("todos").update({ task: editText }).eq('id', id);
     if (error) {
       alert(error.message);
       return;
     }
     const updated = [...todos];
-    updated[editIndex].tusk = editText;
+    updated[editIndex].task = editText;
     setTodos(updated);
     setEditIndex(null);
   }
@@ -99,7 +99,7 @@ export default function List({ todos, setTodos }) {
                   </>
                 ) : (
                   <>
-                    <p className='m-1 flex-grow-1' id={todo.completed ? 'completed' : 'text'}>{index + 1}. {todo.tusk}</p>
+                    <p className='m-1 flex-grow-1' id={todo.completed ? 'completed' : 'text'}>{index + 1}. {todo.task}</p>
                     <button onClick={() => handleDel(index)} className='btn-del btn btn-danger d-flex justify-content-center align-items-center h-100 py-1'>
                       <i className="fas fa-trash"></i>
                     </button>

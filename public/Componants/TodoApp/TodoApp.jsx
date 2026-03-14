@@ -13,11 +13,10 @@ export default function TodoApp() {
 
   useEffect(() => {
     const fechData = async () => {
-      const { data, error } = await supabase.from("todos").select()
+      const { data, error } = await supabase.from("todos").select('*').order("id", { ascending: true });
       if (error) { alert(error.message) }
       
       if (data) {
-        console.log("supabase.todos ->", { data, error })
         setTodos(data)
       }
     }

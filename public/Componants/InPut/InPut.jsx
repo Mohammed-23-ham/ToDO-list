@@ -1,24 +1,24 @@
 import supabase from '../../../src/supabase'
 import { useEffect } from 'react';
 
-export default function InPut({todos, setTodos, inText}) {
+export default function InPut({ todos, setTodos, inText }) {
 
   const handleAdd = async () => {
     const text = inText.current.value.trim();
     if (!text) {
-      alert("Enter your tusk!")
+      alert("Enter your task!")
       return
     }
 
-    if (todos.some(todo => todo.tusk === text)) {
-      alert("This tusk already exists")
+    if (todos.some(todo => todo.task === text)) {
+      alert("This task already exists")
       return
     }
 
-    const { data, error } = await supabase.from("todos").insert({ tusk: text, completed: false }).select().single();
+    const { data, error } = await supabase.from("todos").insert({ task: text, completed: false }).select().single();
     if (error) {
       if (error.message?.includes("duplicate key") || error.code === "23505") {
-        alert("This tusk already exists")
+        alert("This task already exists")
       } else {
         alert(error.message)
       }
@@ -30,14 +30,14 @@ export default function InPut({todos, setTodos, inText}) {
       inText.current.value = ''
     }
   }
-useEffect(() => {
-  console.log(todos);
-}, [todos])
+  useEffect(() => {
+    console.log(todos);
+  }, [todos])
 
   return (
     <div className='inpout row gap-1'>
-        <input ref={inText} className='inpout-form form-control col-10' type="text" placeholder='Enter your tusk...' />
-        <button className='input-btn btn btn-dark col-2 d-flex justify-content-center align-items-center' onClick={handleAdd}><i className="fas fa-plus"></i></button>
+      <input ref={inText} className='inpout-form form-control col-10' type="text" placeholder='Enter your task...' />
+      <button className='input-btn btn btn-dark col-2 d-flex justify-content-center align-items-center' onClick={handleAdd}><i className="fas fa-plus"></i></button>
     </div>
   )
 }
