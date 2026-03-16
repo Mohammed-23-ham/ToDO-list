@@ -20,6 +20,8 @@ export default function InPut({ todos, setTodos, inText, userId }) {
       return
     }
 
+    console.log('Creating todo:', { task: text, completed: false, user_id: userId });
+
     const { data, error } = await supabase.from("todos").insert({ task: text, completed: false, user_id: userId }).select().single();
     if (error) {
       if (error.message?.includes("duplicate key") || error.code === "23505") {
