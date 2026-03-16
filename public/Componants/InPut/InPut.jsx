@@ -1,7 +1,7 @@
 import supabase from '../../../src/supabase'
 import { useEffect } from 'react';
 
-export default function InPut({ todos, setTodos, inText }) {
+export default function InPut({ todos, setTodos, inText, userId }) {
 
   const handleAdd = async () => {
     const text = inText.current.value.trim();
@@ -10,12 +10,17 @@ export default function InPut({ todos, setTodos, inText }) {
       return
     }
 
+    if (!userId) {
+      alert('Unable to add task: user is not authenticated.')
+      return
+    }
+
     if (todos.some(todo => todo.task === text)) {
       alert("This task already exists")
       return
     }
 
-    const { data, error } = await supabase.from("todos").insert({ task: text, completed: false }).select().single();
+    const { data, error } = await supabase.from("todos").insert({ task: text, completed: false, user_id: userId }).select().single();
     if (error) {
       if (error.message?.includes("duplicate key") || error.code === "23505") {
         alert("This task already exists")

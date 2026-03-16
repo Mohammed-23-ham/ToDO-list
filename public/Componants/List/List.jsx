@@ -1,10 +1,15 @@
 import { useState } from 'react'
 import supabase from '../../../src/supabase'
 
-export default function List({ todos, setTodos }) {
+export default function List({ todos, setTodos, userId }) {
 
   const handleDelAll = async () => {
-    const { error } = await supabase.from("todos").delete().neq('id', 0);
+    if (!userId) {
+      alert('Unable to delete tasks: user is not authenticated.');
+      return;
+    }
+
+    const { error } = await supabase.from("todos").delete().eq('user_id', userId);
     if (error) {
       alert(error.message);
       return;
@@ -12,7 +17,12 @@ export default function List({ todos, setTodos }) {
     setTodos([]);
   };
   const handleChAll = async () => {
-    const { error } = await supabase.from("todos").update({ completed: true }).neq('id', 0);
+    if (!userId) {
+      alert('Unable to update tasks: user is not authenticated.');
+      return;
+    }
+
+    const { error } = await supabase.from("todos").update({ completed: true }).eq('user_id', userId);
     if(error) {
       alert(error.message);
       return;
@@ -22,8 +32,13 @@ export default function List({ todos, setTodos }) {
   }
 
   const handleDel = async (index) => {
+    if (!userId) {
+      alert('Unable to delete task: user is not authenticated.');
+      return;
+    }
+
     const id = todos[index].id;
-    const { error } = await supabase.from("todos").delete().eq('id', id);
+    const { error } = await supabase.from("todos").delete().eq('id', id).eq('user_id', userId);
     if (error) {
       alert(error.message);
       return;
@@ -34,8 +49,13 @@ export default function List({ todos, setTodos }) {
   }
 
   const handleCheck = async (index) => {
+    if (!userId) {
+      alert('Unable to update task: user is not authenticated.');
+      return;
+    }
+
     const id = todos[index].id;
-    const { error } = await supabase.from("todos").update({ completed: !todos[index].completed }).eq('id', id);
+    const { error } = await supabase.from("todos").update({ completed: !todos[index].completed }).eq('id', id).eq('user_id', userId);
     if (error) {
       alert(error.message);
       return;
@@ -50,9 +70,14 @@ export default function List({ todos, setTodos }) {
   const [editText, setEditText] = useState("");
 
   const handleEdit = async (index) => {
+    if (!userId) {
+      alert('Unable to edit task: user is not authenticated.');
+      return;
+    }
+
     if (editIndex === index) {
       const id = todos[index].id;
-      const { error } = await supabase.from("todos").update({ task: editText }).eq('id', id);
+      const { error } = await supabase.from("todos").update({ task: editText }).eq('id', id).eq('user_id', userId);
       if (error) {
         alert(error.message)
       }
@@ -63,8 +88,13 @@ export default function List({ todos, setTodos }) {
   };
 
   const handleConfirmEdit = async () => {
+    if (!userId) {
+      alert('Unable to edit task: user is not authenticated.');
+      return;
+    }
+
     const id = todos[editIndex].id;
-    const { error } = await supabase.from("todos").update({ task: editText }).eq('id', id);
+    const { error } = await supabase.from("todos").update({ task: editText }).eq('id', id).eq('user_id', userId);
     if (error) {
       alert(error.message);
       return;

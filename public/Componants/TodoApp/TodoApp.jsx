@@ -10,6 +10,7 @@ export default function TodoApp() {
     const saved = localStorage.getItem('todos')
     return saved ? JSON.parse(saved) : []
   })
+  const [userId, setUserId] = useState(null)
   const inText = useRef()
   const navigate = useNavigate();
 
@@ -33,7 +34,14 @@ export default function TodoApp() {
         return;
       }
 
-      const { data: todosData, error } = await supabase.from('todos').select('*').order('id', { ascending: true });
+      const userId = session.user?.id;
+      setUserId(userId);
+
+      const { data: todosData, error } = await supabase
+        .from('todos')
+        .select('*')
+        .eq('user_id', userId)
+        .order('id', { ascending: true });
       if (error) {
         alert(error.message);
       }
@@ -58,10 +66,12 @@ export default function TodoApp() {
           inText={inText}
           todos={todos}
           setTodos={setTodos}
+          userId={userId}
         />
         <List
           todos={todos}
           setTodos={setTodos}
+          userId={userId}
         />
       </div>
     </>
