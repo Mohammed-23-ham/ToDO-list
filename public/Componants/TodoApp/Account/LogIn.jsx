@@ -23,11 +23,18 @@ export default function LogIn() {
         })
 
         if (data) {
-            alert('Logged in successfully!')
+            const verified = data.user?.email_confirmed_at;
+            if (!verified) {
+                await supabase.auth.signOut();
+                setError('Please verify your email before logging in. Check your inbox for the confirmation link.');
+                return;
+            }
+
+            alert('Logged in successfully!');
             setEmail('');
             setPassword('');
             setError('');
-            navigate('/')
+            navigate('/');
         }
 
         if (error) {
@@ -39,6 +46,7 @@ export default function LogIn() {
             <div className='navbar p-1'>
                 <button onClick={() => navigate('/')} className='user-btn btn btn-dark'>Main</button>
                 <button onClick={() => navigate('/sign-up')} className='user-btn btn btn-dark'>Signup</button>
+                <button onClick={() => navigate('/log-out')} className='user-btn btn btn-danger'>LogOut</button>
             </div>
             <h1 className='text-center mt-5'>LogIn</h1>
             <div className="d-flex justify-content-center align-items-center h-100 mt-5">

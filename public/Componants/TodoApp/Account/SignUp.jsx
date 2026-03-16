@@ -21,11 +21,12 @@ export default function SignUp() {
                 password
             })
             if (data) {
-                alert('Account created successfully! Please check your email to confirm your account.');
+                alert('Account created successfully! Please check your email and confirm your account before logging in.');
 
                 setEmail('');
                 setPassword('');
                 setError('');
+                navigate('/log-in');
             }
             if (error) {
                 setError(error.message);
@@ -42,6 +43,7 @@ export default function SignUp() {
             <div className='navbar p-1'>
                 <button onClick={() => navigate('/')} className='user-btn btn btn-dark'>Main</button>
                 <button onClick={() => navigate('/log-in')} className='user-btn btn btn-dark'>LogIn</button>
+                <button onClick={() => navigate('/log-out')} className='user-btn btn btn-danger'>logout</button>
             </div>
             <h1 className='text-center mt-5'>SignUp</h1>
             <div className="d-flex justify-content-center align-items-center h-100 mt-5">
