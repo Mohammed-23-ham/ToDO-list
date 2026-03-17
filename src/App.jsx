@@ -3,7 +3,6 @@ import './App.css'
 import TodoApp from '../public/Componants/TodoApp/TodoApp'
 import SignUp from '../public/Componants/TodoApp/Account/SignUp'
 import LogIn from '../public/Componants/TodoApp/Account/LogIn'
-import LogOut from '../public/Componants/TodoApp/Account/Logout'
 import AccountManager from '../public/Componants/TodoApp/Account/AccountManager'
 
 function App() {
@@ -15,7 +14,6 @@ function App() {
           <Route path="/account-manager" element={<AccountManager />} />
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/log-in" element={<LogIn />} />
-          <Route path="/log-out" element={<LogOut />} />
         </Routes>
       </div>
     </BrowserRouter>
