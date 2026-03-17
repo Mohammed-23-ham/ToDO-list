@@ -54,12 +54,27 @@ export default function TodoApp() {
     checkAuthAndFetch();
   }, [navigate])
 
+  const logOutFun = async () => {
+    const LogOut = async () => {
+        const { error } = await supabase.auth.signOut();
+
+        if (error) {
+            alert('Error logging out: ' + error.message);
+        } else {
+            alert('Logged out successfully!');
+            navigate('/');
+        }
+    }
+    let confirmation = confirm("Are you sure to LogOut?");
+    if(confirmation){ LogOut()}
+    if(!confirmation){navigate('/')}
+  }
+
   return (
     <>
-      <div className='navbar p-1'>
-        <button onClick={() => navigate('/sign-up')} className='user-btn btn btn-dark'>Signup</button>
-        <button onClick={() => navigate('/log-in')} className='user-btn btn btn-dark'>Login</button>
-        <button onClick={() => navigate('/log-out')} className='user-btn btn btn-danger'>Logout</button>
+      <div className='navbar b-1'>
+        <button onClick={() => navigate('/account-manager')} className='user-btn btn btn-primary'><i className='fas fa-gear'></i></button>
+        <button onClick={logOutFun} className='user-btn btn btn-danger'><i className='fas fa-door-open'></i></button>
       </div>
       <div className='td-app justify-content-center align-items-center d-flex flex-column align-items-center gap-5'>
         <InPut
