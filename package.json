@@ -13,6 +13,7 @@
     "@fortawesome/fontawesome-free": "^7.2.0",
     "@icon/font-awesome": "4.7.0-2",
     "@supabase/supabase-js": "^2.99.1",
+    "@vercel/analytics": "^2.0.1",
     "bootstrap": "^5.3.8",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
