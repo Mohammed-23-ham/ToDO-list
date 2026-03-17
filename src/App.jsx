@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { Analytics } from '@vercel/analytics/react'
 import './App.css'
 import TodoApp from '../public/Componants/TodoApp/TodoApp'
 import SignUp from '../public/Componants/TodoApp/Account/SignUp'
@@ -16,6 +17,7 @@ function App() {
           <Route path="/log-in" element={<LogIn />} />
         </Routes>
       </div>
+      <Analytics />
     </BrowserRouter>
   )
 }
