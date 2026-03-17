@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { Analytics } from "@vercel/analytics/next"
 import './App.css'
 import TodoApp from '../public/Componants/TodoApp/TodoApp'
 import SignUp from '../public/Componants/TodoApp/Account/SignUp'
@@ -18,6 +17,7 @@ function App() {
         </Routes>
         <Analytics />
       </div>
+      <Analytics />
     </BrowserRouter>
   )
 }
