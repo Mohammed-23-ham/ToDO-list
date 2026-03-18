@@ -42,7 +42,7 @@ export default function SignUp() {
         <>
             <div className='navbar b-1'>
                 <button onClick={() => navigate('/')} className='user-btn btn btn-primary'><i className='fas fa-house'></i></button>
-        <button onClick={() => navigate('/account-manager')} className='user-btn btn btn-primary'><i className='fas fa-gear'></i></button>
+                <button onClick={() => navigate('/account-manager')} className='user-btn btn btn-primary'><i className='fas fa-gear'></i></button>
             </div>
             <h1 className='text-center mt-5'>SignUp</h1>
             <div className="d-flex justify-content-center align-items-center h-100 mt-5">

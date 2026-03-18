@@ -1,11 +1,11 @@
 .td-app {
     border-radius: 20px;
     box-shadow: 0 0 10px #7b7575;
-    width: 70%;
-    height: 75vb;
+    width: 80%;
+    height: 80vb;
     position: absolute;
-    left: 15%;
-    top: 15%;
+    left: 10%;
+    top: 10%;
     padding: 10px;
 }
 

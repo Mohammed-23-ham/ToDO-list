@@ -19,14 +19,12 @@ export default function TodoApp() {
       const { data } = await supabase.auth.getSession();
       const session = data?.session;
 
-      // Redirect if not logged in
       if (!session) {
         alert('Please log in to access the app.');
         navigate('/log-in');
         return;
       }
 
-      // Ensure email is verified (if your Supabase project requires it)
       if (!session.user?.email_confirmed_at) {
         await supabase.auth.signOut();
         alert('Please verify your email before accessing the app. Check your inbox for the confirmation link.');
