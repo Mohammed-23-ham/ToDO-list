@@ -61,11 +61,13 @@ export default function TodoApp() {
         } else {
             alert('Logged out successfully!');
             navigate('/');
+            window.location.reload()
         }
     }
     let confirmation = confirm("Are you sure to LogOut?");
     if(confirmation){ LogOut()}
     if(!confirmation){navigate('/')}
+    
   }
 
   return (
